@@ -16,7 +16,7 @@ import java.util.Collection;
  * Unit test for Package.
  */
 @RunWith(Parameterized.class)
-public class PackageTest {
+public class PackageTestMust {
 
     @Parameters
     public static Collection<Object[]> data() {
@@ -42,12 +42,14 @@ public class PackageTest {
     private double fInput;
     private String fExpected;
 
-    public PackageTest(int height, int width, int depth, double weight, String destination, String expected)
+    public PackageTestMust(int height, int width, int depth, double weight, String destination, String expected)
             throws InvalidDestinationException {
+
         CountryDestination cd = CountryDestination.valueOf(destination);
         Package p = new Package(height, width, depth, weight);
         this.fInput = ShippingCostsCalculator.calculateShippingCost(p,cd);
         this.fExpected = expected;
+        //System.out.println(p.toString());
     }
 
     @Test
