@@ -1,21 +1,22 @@
 package com.fredericboisguerin.insa;
 
-import javax.print.attribute.standard.Destination;
-
-enum DestinationCountry {
+enum CountryDestination {
     FR,MC
 }
 public class ShippingCostsCalculator {
 
-    public double calculateShippingCost(Package p, DestinationCountry d) {
+    public static double calculateShippingCost(Package p, CountryDestination d) throws InvalidDestinationException {
 
         double standardCost = p.calculateLocalShippingCost();
-        if (d.equals(DestinationCountry.FR)){
+        System.out.println(standardCost);
+        if (d == CountryDestination.FR){
             return standardCost;
         }
-        else if (d.equals(DestinationCountry.MC)){
+        else if (d == CountryDestination.MC){
             return (standardCost * 1.087);
         }
-        return 0;
+        else {
+            throw new InvalidDestinationException();
+        }
     }
 }
