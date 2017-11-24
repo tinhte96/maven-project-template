@@ -39,18 +39,20 @@ public class PackageTest {
                 { 653, 331, 271, 3.650d, "MC", "91,05" }});
     }
 
-    private Package fInput;
+    private double fInput;
     private String fExpected;
 
-    public PackageTest(int height, int width, int depth, double weight, String destination, String expected){
-        this.fInput = new Package(height, width, depth, weight);
+    public PackageTest(int height, int width, int depth, double weight, String destination, String expected)
+            throws InvalidDestinationException {
+        CountryDestination cd = CountryDestination.valueOf(destination);
+        Package p = new Package(height, width, depth, weight);
+        this.fInput = ShippingCostsCalculator.calculateShippingCost(p,cd);
         this.fExpected = expected;
     }
 
     @Test
     public void test() {
-        System.out.println(fInput.calculateLocalShippingCost());
-        String result = Double.toString(fInput.calculateLocalShippingCost()).replace('.',',');
+        String result = String.format( "%.2f", fInput).replace('.',',');
         assertEquals(fExpected,result);
     }
 }
