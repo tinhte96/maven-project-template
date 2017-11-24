@@ -2,8 +2,8 @@ package com.fredericboisguerin.insa;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.*;
 
-import static jdk.nashorn.internal.objects.NativeMath.round;
 
 public class Package {
 
@@ -25,19 +25,20 @@ public class Package {
     }
 
     private boolean checkSize() {
-        return this.height <= STANDARD_HEIGHT &&
-                this.width <= STANDARD_WIDTH  &&
-                this.depth <= STANDARD_DEPTH ;
+
+        ArrayList<Integer> array = new ArrayList<>();
+        array.add(this.height);
+        array.add(this.width);
+        array.add(this.depth);
+        Collections.sort(array);
+
+        return     array.get(2) <= this.STANDARD_HEIGHT
+                && array.get(0) <= this.STANDARD_DEPTH
+                && array.get(1) <= this.STANDARD_WIDTH ;
     }
 
     private boolean checkWeight() {
         return this.weight <= STANDARD_WEIGHT;
-    }
-
-    private static double round(double value) {
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(2, RoundingMode.CEILING);
-        return bd.doubleValue();
     }
 
     public double calculateLocalShippingCost(){
@@ -57,11 +58,26 @@ public class Package {
         costSize = volume * 1.43;
         costWeight = this.weight * 21.62;
 
-        if(costSize <= costWeight){
+        if(costSize >= costWeight){
             return round(costSize);
         }
         else {
             return round(costWeight);
         }
+    }
+
+    public String toString(){
+        double volume = this.height * this.width * this.depth * Math.pow(10,-6);
+        return "height : "+this.height+"\nwidth "+this.width+"\ndepth "+this.depth+"\nweight "+this.weight
+                +"\ncost "+this.calculateLocalShippingCost()
+                +"\nvolume"+(volume)
+                +"\ncostSize"+(volume*1.43)
+                +"\ncostWeight"+(this.weight*21.36);
+    }
+
+    private static double round(double value) {
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(3, RoundingMode.CEILING);
+        return bd.doubleValue();
     }
 }
