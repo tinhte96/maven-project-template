@@ -15,7 +15,7 @@ public class PackageTestShould {
     public void fail_if_destination_is_not_valid()
         throws InvalidDestinationException{
 
-        Package p = new Package(VALID_HEIGHT, VALID_WIDTH, VALID_DEPTH, VALID_WEIGHT);
+        Package p = new LargePackage(VALID_HEIGHT, VALID_WIDTH, VALID_DEPTH, VALID_WEIGHT);
         System.out.println(ShippingCostsCalculator.calculateShippingCost(p,VN));
     }
 
