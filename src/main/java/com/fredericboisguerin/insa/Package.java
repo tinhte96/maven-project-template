@@ -5,66 +5,37 @@ import java.math.RoundingMode;
 import java.util.*;
 
 
-public class Package {
+public abstract class Package {
 
-    private final int STANDARD_HEIGHT = 229;
-    private final int STANDARD_WIDTH = 162;
-    private final int STANDARD_DEPTH = 25;
-    private final double STANDARD_WEIGHT = 1.8;
+    public static final int STANDARD_HEIGHT = 229;
+    public static final int STANDARD_WIDTH = 162;
+    public static final int STANDARD_DEPTH = 25;
+    public static final double STANDARD_WEIGHT = 1.8;
 
-    private int height;
-    private int width;
-    private int depth;
-    private double weight;
+    protected int height;
+    protected int width;
+    protected int depth;
+    protected double weight;
 
-    public Package (int height, int width, int depth, double weight){
-        this.height = height;
-        this.width = width;
-        this.depth = depth;
-        this.weight = weight;
-    }
 
-    private boolean checkSize() {
+    public static boolean checkSmallPackage(int height, int width, int depth) {
 
         ArrayList<Integer> array = new ArrayList<>();
-        array.add(this.height);
-        array.add(this.width);
-        array.add(this.depth);
+        array.add(height);
+        array.add(width);
+        array.add(depth);
         Collections.sort(array);
 
-        return     array.get(2) <= this.STANDARD_HEIGHT
-                && array.get(0) <= this.STANDARD_DEPTH
-                && array.get(1) <= this.STANDARD_WIDTH ;
+        return     array.get(2) <= STANDARD_HEIGHT
+                && array.get(0) <= STANDARD_DEPTH
+                && array.get(1) <= STANDARD_WIDTH ;
     }
 
-    private boolean checkWeight() {
-        return this.weight <= STANDARD_WEIGHT;
+    public static boolean checkMediumPackage(double weight) {
+        return weight <= STANDARD_WEIGHT;
     }
 
-    public double calculateLocalShippingCost(){
-        double costSize = 0;
-        double costWeight = 0;
-        double volume = 0;
-
-        if (checkSize()) {
-            return round(12.00);
-        }
-
-        if (checkWeight()){
-            return round(this.weight * 17.59 + 2.86);
-        }
-
-        volume = this.height * this.width * this.depth * Math.pow(10,-6);
-        costSize = volume * 1.43;
-        costWeight = this.weight * 21.62;
-
-        if(costSize >= costWeight){
-            return round(costSize);
-        }
-        else {
-            return round(costWeight);
-        }
-    }
+    public abstract double calculateLocalShippingCost();
 
     public String toString(){
         double volume = this.height * this.width * this.depth * Math.pow(10,-6);
@@ -75,7 +46,7 @@ public class Package {
                 +"\ncostWeight"+(this.weight*21.36);
     }
 
-    private static double round(double value) {
+    protected static double round(double value) {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(3, RoundingMode.CEILING);
         return bd.doubleValue();
