@@ -1,8 +1,5 @@
 package com.fredericboisguerin.insa;
 
-enum CountryDestination {
-    FR,MC
-}
 public class ShippingCostsCalculator {
 
     public static double calculateShippingCost(Package p, CountryDestination d) throws InvalidDestinationException {
