@@ -62,7 +62,6 @@ public class PackageTestMust {
 
     @Test
     public void test() {
-        System.out.println(fInput);
         String result = String.format( "%.2f", fInput).replace('.',',');
         assertEquals(fExpected,result);
     }
