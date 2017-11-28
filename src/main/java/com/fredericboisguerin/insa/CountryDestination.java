@@ -1,5 +1,5 @@
 package com.fredericboisguerin.insa;
 
 public enum CountryDestination {
-    FR,MC
+    FR,MC,DOMTOM
 }
