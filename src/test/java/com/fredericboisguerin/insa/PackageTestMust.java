@@ -47,20 +47,9 @@ public class PackageTestMust {
 
         CountryDestination cd = CountryDestination.valueOf(destination);
 
-        if (Package.checkSmallPackage(height,width,depth)){
-            SmallPackage p = new SmallPackage(height, width, depth, weight);
-            this.fInput = ShippingCostsCalculator.calculateShippingCost(p,cd);
-        }
-        else if (Package.checkMediumPackage(weight)){
-            MediumPackage p = new MediumPackage(height, width, depth, weight);
-            this.fInput = ShippingCostsCalculator.calculateShippingCost(p,cd);
-        }
-        else{
-            LargePackage p = new LargePackage(height, width, depth, weight);
-            this.fInput = ShippingCostsCalculator.calculateShippingCost(p,cd);
-        }
+        Package p = PackageFactory.measurePackage(height,width,depth,weight);
+        this.fInput = ShippingCostsCalculator.calculateShippingCost(p,cd);
         this.fExpected = expected;
-        //System.out.println(p.toString());
     }
 
     @Test
