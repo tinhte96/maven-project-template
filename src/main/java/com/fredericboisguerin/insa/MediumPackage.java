@@ -15,6 +15,6 @@ public class MediumPackage extends Package {
     }
 
     public double calculateLocalShippingCost() {
-        return round(this.weight * 17.59 + 2.86);
+        return this.weight * 17.59 + 2.86;
     }
 }

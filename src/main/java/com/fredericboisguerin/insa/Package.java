@@ -18,28 +18,15 @@ public abstract class Package {
     protected double weight;
 
 
-    public static boolean checkSmallPackage(int height, int width, int depth) {
-
-        ArrayList<Integer> array = new ArrayList<>();
-        array.add(height);
-        array.add(width);
-        array.add(depth);
-        Collections.sort(array);
-
-        return     array.get(2) <= STANDARD_HEIGHT
-                && array.get(0) <= STANDARD_DEPTH
-                && array.get(1) <= STANDARD_WIDTH ;
-    }
-
-    public static boolean checkMediumPackage(double weight) {
-        return weight <= STANDARD_WEIGHT;
-    }
-
     public abstract double calculateLocalShippingCost();
+
+    public double roundedCost () {
+        return round(this.calculateLocalShippingCost());
+    }
 
     public static double round(double value) {
         BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(3, RoundingMode.CEILING);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
 

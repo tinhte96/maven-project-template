@@ -10,6 +10,6 @@ public class SmallPackage extends Package {
     }
 
     public double calculateLocalShippingCost() {
-        return round(12.00);
+        return 12.00;
     }
 }

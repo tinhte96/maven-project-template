@@ -14,12 +14,6 @@ public class LargePackage extends Package {
         double volume = this.height * this.width * this.depth * Math.pow(10,-6);
         double costSize = volume * 1.43;
         double costWeight = this.weight * 21.62;
-
-        if(costSize >= costWeight){
-            return round(costSize);
-        }
-        else {
-            return round(costWeight);
-        }
+        return Math.max(costSize,costWeight);
     }
 }

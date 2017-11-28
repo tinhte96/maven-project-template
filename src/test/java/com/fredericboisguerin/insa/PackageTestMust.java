@@ -44,7 +44,7 @@ public class PackageTestMust {
 
                 { 653, 133, 271, 2.132d, "DOMTOM", "49,84" },
 
-                { 653, 331, 271, 3.650d, "DOMTOM", "89,55" },});
+                { 653, 331, 271, 3.650d, "DOMTOM", "89,54" },});
     }
 
     private double fInput;
@@ -62,6 +62,7 @@ public class PackageTestMust {
 
     @Test
     public void test() {
+        System.out.println(fInput);
         String result = String.format( "%.2f", fInput).replace('.',',');
         assertEquals(fExpected,result);
     }

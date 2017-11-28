@@ -4,7 +4,7 @@ public class ShippingCostsCalculator {
 
     public static double calculateShippingCost(Package p, CountryDestination d) throws InvalidDestinationException {
 
-        double standardCost = p.calculateLocalShippingCost();
+        double standardCost = p.roundedCost();
 
         if (d == CountryDestination.FR){
             return standardCost;
