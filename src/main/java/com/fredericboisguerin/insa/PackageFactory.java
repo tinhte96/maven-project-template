@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class PackageFactory {
 
-    public static Package measurePackage (int height, int width, int depth, double weight) {
+    public Package measurePackage (int height, int width, int depth, double weight) {
         if (checkSmallPackage(height,width,depth)){
             return new SmallPackage(height, width, depth, weight);
         }
