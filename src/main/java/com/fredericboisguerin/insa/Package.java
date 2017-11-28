@@ -37,6 +37,12 @@ public abstract class Package {
 
     public abstract double calculateLocalShippingCost();
 
+    public static double round(double value) {
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(3, RoundingMode.CEILING);
+        return bd.doubleValue();
+    }
+
     public String toString(){
         double volume = this.height * this.width * this.depth * Math.pow(10,-6);
         return "height : "+this.height+"\nwidth "+this.width+"\ndepth "+this.depth+"\nweight "+this.weight
@@ -44,11 +50,5 @@ public abstract class Package {
                 +"\nvolume"+(volume)
                 +"\ncostSize"+(volume*1.43)
                 +"\ncostWeight"+(this.weight*21.36);
-    }
-
-    protected static double round(double value) {
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(3, RoundingMode.CEILING);
-        return bd.doubleValue();
     }
 }
