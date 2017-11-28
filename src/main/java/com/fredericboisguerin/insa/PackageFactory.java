@@ -17,11 +17,11 @@ public class PackageFactory {
         }
     }
 
-    public static boolean checkMediumPackage(double weight) {
+    private static boolean checkMediumPackage(double weight) {
         return weight <= Package.STANDARD_WEIGHT;
     }
 
-    public static boolean checkSmallPackage(int height, int width, int depth) {
+    private static boolean checkSmallPackage(int height, int width, int depth) {
 
         ArrayList<Integer> array = new ArrayList<>();
         array.add(height);
