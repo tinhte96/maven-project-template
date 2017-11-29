@@ -54,8 +54,9 @@ public class PackageTestMust {
             throws InvalidDestinationException {
 
         CountryDestination cd = CountryDestination.valueOf(destination);
+        PackageFactory pf = new PackageFactory();
 
-        Package p = PackageFactory.measurePackage(height,width,depth,weight);
+        Package p = pf.measurePackage(height,width,depth,weight);
         this.fInput = ShippingCostsCalculator.calculateShippingCost(p,cd);
         this.fExpected = expected;
     }
