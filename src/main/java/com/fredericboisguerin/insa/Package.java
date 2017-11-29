@@ -17,6 +17,13 @@ public abstract class Package {
     protected int depth;
     protected double weight;
 
+    public Package (int height, int width, int depth, double weight){
+        this.height = height;
+        this.width = width;
+        this.depth = depth;
+        this.weight = weight;
+    }
+
 
     public abstract double calculateLocalShippingCost();
 
@@ -30,12 +37,5 @@ public abstract class Package {
         return bd.doubleValue();
     }
 
-    public String toString(){
-        double volume = this.height * this.width * this.depth * Math.pow(10,-6);
-        return "height : "+this.height+"\nwidth "+this.width+"\ndepth "+this.depth+"\nweight "+this.weight
-                +"\ncost "+this.calculateLocalShippingCost()
-                +"\nvolume"+(volume)
-                +"\ncostSize"+(volume*1.43)
-                +"\ncostWeight"+(this.weight*21.36);
-    }
+    public abstract String toString();
 }
