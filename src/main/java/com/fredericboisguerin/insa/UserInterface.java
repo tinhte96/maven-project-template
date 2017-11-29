@@ -11,7 +11,7 @@ public class UserInterface {
             sc = new Scanner(System.in);
         }
 
-        public Package askPackageInfo() {
+        public Package askPackageInfo(PackageFactory pf) {
 
             System.out.println("Your package information : ");
 
@@ -31,22 +31,15 @@ public class UserInterface {
             Double weight = sc.nextDouble();
             System.out.println();
 
-            return PackageFactory.measurePackage(height,width,depth,weight);
+            return pf.measurePackage(height,width,depth,weight);
         }
 
-        public CountryDestination askDestination()
-                throws InvalidDestinationException{
+        public CountryDestination askDestination(){
 
-            System.out.println("Your destination : ");
             System.out.print("destination : ");
-            String aux = sc.nextLine();
+            String aux = sc.next();
             System.out.println();
 
-            for (CountryDestination cd : CountryDestination.values()){
-                if (cd == (CountryDestination.valueOf(aux))){
-                    return cd;
-                }
-            }
-            throw  new InvalidDestinationException();
+            return CountryDestination.valueOf(aux);
         }
 }
